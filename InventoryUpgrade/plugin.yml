@@ -1,0 +1,18 @@
+name: InventoryUpgrade
+main: me.Arcator.InventoryUpgrade.Main
+description: Custom inventory slot upgrades
+version: 1.0
+api-version: 1.13
+
+commands:
+  invupgrade:
+    usage: /<command>
+    
+permissions:
+  inventoryupgrade.*:
+    description: Gives access to all InventoryUpgrade commands
+    children:
+      inventoryupgrade.upgrade: true
+  inventoryupgrade.upgrade:
+    description: Allows to open the upgrading GUI
+    default: true
