@@ -1,4 +1,4 @@
-package me.Arcator.InventoryUpgrade.Files;
+package me.Darrionat.InventoryUpgrade.Files;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,8 +7,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import me.Arcator.InventoryUpgrade.Main;
-import me.Arcator.InventoryUpgrade.Utils.Utils;
+import me.Darrionat.InventoryUpgrade.Main;
+import me.Darrionat.InventoryUpgrade.utils.Utils;
 
 public class FileManager {
 
@@ -27,17 +27,16 @@ public class FileManager {
 		if (!plugin.getDataFolder().exists()) {
 			plugin.getDataFolder().mkdir();
 		}
-		File = new File(plugin.getDataFolder(), fileName + ".yml");
+		File = new File(plugin.getDataFolder(), fileName);
 
 		if (!File.exists()) {
 			try {
 				File.createNewFile();
 				config = YamlConfiguration.loadConfiguration(File);
-				String successMessage = "&e[" + plugin.getName() + "] &aCreated the " + fileName + ".yml file";
+				String successMessage = "&e[" + plugin.getName() + "] &aCreated the " + fileName + " file";
 				Bukkit.getServer().getConsoleSender().sendMessage(Utils.chat(successMessage));
-				saveMessages();
 			} catch (IOException exe) {
-				String failMessage = "&e[" + plugin.getName() + "] &cFailed to create the " + fileName + ".yml file";
+				String failMessage = "&e[" + plugin.getName() + "] &cFailed to create the " + fileName + " file";
 				Bukkit.getServer().getConsoleSender().sendMessage(Utils.chat(failMessage));
 				exe.printStackTrace();
 			}
@@ -46,7 +45,7 @@ public class FileManager {
 	}
 
 	public boolean fileExists(String fileName) {
-		File = new File(plugin.getDataFolder(), fileName + ".yml");
+		File = new File(plugin.getDataFolder(), fileName);
 		if (File.exists()) {
 			return true;
 		}
@@ -54,40 +53,26 @@ public class FileManager {
 	}
 
 	public void deleteFile(String fileName) {
-		File = new File(plugin.getDataFolder(), fileName + ".yml");
+		File = new File(plugin.getDataFolder(), fileName);
 		File.delete();
 		return;
 	}
 
 	public FileConfiguration getDataConfig(String fileName) {
-		File = new File(plugin.getDataFolder(), fileName + ".yml");
+		File = new File(plugin.getDataFolder(), fileName);
 		config = YamlConfiguration.loadConfiguration(File);
 		return config;
 	}
 
 	public File getFile(String fileName) {
-		File = new File(plugin.getDataFolder(), fileName + ".yml");
+		File = new File(plugin.getDataFolder(), fileName);
 		return File;
 	}
 
-	public void saveMessages() {
-		/*
-		 * try { messagesConfig.set("updatePt2",
-		 * "&bAn update for &7GUIShopSpawners &f(%UpdatedVersion%) &bis available at");
-		 * messagesConfig.save(messagesFile); String successMessage = "&e[" +
-		 * plugin.getName() + "] &aSaved the messages.yml file";
-		 * Bukkit.getServer().getConsoleSender().sendMessage(Utils.chat(successMessage))
-		 * ; } catch (IOException exe) {
-		 * 
-		 * }
-		 */
-
-	}
-
 	public void reloadFile(String fileName) {
-		File = new File(plugin.getDataFolder(), fileName + ".yml");
+		File = new File(plugin.getDataFolder(), fileName);
 		config = YamlConfiguration.loadConfiguration(File);
-		String reloadMessage = "&e[" + plugin.getName() + "] &aReloaded the " + fileName + ".yml file";
+		String reloadMessage = "&e[" + plugin.getName() + "] &aReloaded the " + fileName + " file";
 		Bukkit.getServer().getConsoleSender().sendMessage(Utils.chat(reloadMessage));
 	}
 }

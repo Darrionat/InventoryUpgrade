@@ -1,4 +1,4 @@
-package me.Arcator.InventoryUpgrade.Listeners;
+package me.Darrionat.InventoryUpgrade.Listeners;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,11 +9,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.Inventory;
 
-import me.Arcator.InventoryUpgrade.Main;
-import me.Arcator.InventoryUpgrade.Files.FileManager;
-import me.Arcator.InventoryUpgrade.Utils.Utils;
+import me.Darrionat.InventoryUpgrade.Main;
+import me.Darrionat.InventoryUpgrade.Files.FileManager;
+import me.Darrionat.InventoryUpgrade.utils.Utils;
 
 public class PlayerJoin implements Listener {
 
@@ -27,20 +26,21 @@ public class PlayerJoin implements Listener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 		FileManager filemanager = new FileManager(plugin);
-		FileConfiguration playerdata = filemanager.getDataConfig("playerdata");
+		FileConfiguration playerdata = filemanager.getDataConfig("playerdata.yml");
 		Player p = e.getPlayer();
 		String uuid = p.getUniqueId().toString();
 		if (playerdata.contains(uuid) == false) {
 			playerdata.set(uuid, 1);
-			File playerdataFile = filemanager.getFile("playerdata");
+			File playerdataFile = filemanager.getFile("playerdata.yml");
 			try {
 				playerdata.save(playerdataFile);
 			} catch (IOException exe) {
 				exe.printStackTrace();
 			}
 		}
-		Inventory inv = p.getInventory();
-		Utils.setFillItem(inv, p, plugin);
+		Utils utils = new Utils(plugin);
+
+		utils.giveBackpack(p);
 	}
 
 }

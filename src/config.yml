@@ -1,15 +1,8 @@
+allWorlds: true
 enabledWorlds: [world, world_nether, world_the_end]
-BuySlot GUI Name: "Inventory Upgrade"
-#This is in case they somehow get an item in a locked slot, it won't delete the item.
-deleteItemsInSlots: false
-#This allows a user to move the fill item in their inventory while in creative. (Recommended)
-allowClickInCreative: true
-#How often it sets the fill item in an inventory (Seconds)
-Timer Interval: 10
-GUIItemNames:
-    CloseMenu: "&eClose Menu"
-    Purchase: "&aPurchase New Slot"
-    Unlocked: "&7Unlocked"
+keepBackpackOnDeath: true
+Backpack:
+    name: '&eBackpack'
 FillItem:
     fillItemMaterial: RED_STAINED_GLASS_PANE
     qty: 1
@@ -18,9 +11,7 @@ FillItem:
     
 messages:
     Error: "&cThere was an error. Please contact an Admin"
-    NotPlayer: "&cOnly players can use this command"
     NotEnoughMoney: "&cYou do not have enough money for this purchase."
-    NoPerm: "&cYou do not have the permission %perm%!"
     SuccessfulPurchase: "&aYou just bought a new slot!"
 UpgradeCost:
     2: 2000
@@ -47,4 +38,4 @@ UpgradeCost:
     24: 24000
     25: 25000
     26: 26000
-    27: 27000 
+    27: 27000
