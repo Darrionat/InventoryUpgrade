@@ -38,11 +38,14 @@ public class InventoryClick implements Listener {
 		}
 
 		Utils utils = new Utils(plugin);
-		if (utils.isBackpack(e.getCurrentItem()) && invType != InventoryType.PLAYER) {
+		if (utils.isBackpack(e.getCurrentItem()) && invType != InventoryType.PLAYER && invType != InventoryType.CRAFTING
+				&& invType != InventoryType.CREATIVE) {
 			e.setCancelled(true);
 			return;
 		}
-
+		if (!Utils.hasBackpackOpen.contains(p.getUniqueId())) {
+			return;
+		}
 		if (e.getCurrentItem().equals(utils.getFillItem(p))) {
 			e.setCancelled(true);
 			FileConfiguration playerdata = fileManager.getDataConfig("playerdata.yml");

@@ -3,6 +3,8 @@ enabledWorlds: [world, world_nether, world_the_end]
 keepBackpackOnDeath: true
 Backpack:
     name: '&eBackpack'
+    material: BARREL
+    glowing: true
 FillItem:
     fillItemMaterial: RED_STAINED_GLASS_PANE
     qty: 1

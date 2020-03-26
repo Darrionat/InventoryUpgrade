@@ -2,7 +2,7 @@ name: InventoryUpgrade
 author: Darrionat
 main: me.Darrionat.InventoryUpgrade.Main
 description: Custom inventory slot upgrades
-version: 1.1
+version: 1.12
 api-version: 1.13
 
 commands:

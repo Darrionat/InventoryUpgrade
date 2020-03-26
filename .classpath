@@ -6,7 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/thorn/OneDrive/Desktop/Games/Plugins/spigot-1.14.4.jar"/>
 	<classpathentry kind="lib" path="C:/Users/thorn/OneDrive/Desktop/Games/Plugins/Vault.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thorn/OneDrive/Desktop/Games/Plugins/spigot-1.15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -2,7 +2,6 @@ package me.Darrionat.InventoryUpgrade.utils;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -14,14 +13,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
-
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
 
 import me.Darrionat.InventoryUpgrade.Main;
 import me.Darrionat.InventoryUpgrade.Files.FileManager;
@@ -125,34 +122,16 @@ public class Utils {
 	// Backpack utils
 	public ItemStack getBackpack() {
 		FileConfiguration config = plugin.getConfig();
-		ItemStack skull = new ItemStack(Material.PLAYER_HEAD, 1);
-		String URL = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWM5NmJlNzg4NmViN2RmNzU1MjVhMzYzZTVmNTQ5NjI2YzIxMzg4ZjBmZGE5ODhhNmU4YmY0ODdhNTMifX19=";
-		createSkull(skull, URL);
-		ItemMeta meta = skull.getItemMeta();
+		Material material = Material.getMaterial(config.getString("Backpack.name"));
+		ItemStack item = new ItemStack(material, 1);
+		ItemMeta meta = item.getItemMeta();
 		meta.setDisplayName(chat(config.getString("Backpack.name")));
-		skull.setItemMeta(meta);
-		return skull;
-	}
-
-	public static ItemStack createSkull(ItemStack head, String url) {
-		if (url.isEmpty())
-			return head;
-
-		SkullMeta headMeta = (SkullMeta) head.getItemMeta();
-		GameProfile profile = new GameProfile(UUID.randomUUID(), null);
-
-		profile.getProperties().put("textures", new Property("textures", url));
-
-		try {
-			Field profileField = headMeta.getClass().getDeclaredField("profile");
-			profileField.setAccessible(true);
-			profileField.set(headMeta, profile);
-
-		} catch (IllegalArgumentException | NoSuchFieldException | SecurityException | IllegalAccessException error) {
-			error.printStackTrace();
+		if (config.getBoolean("Backpack.glowing")) {
+			meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+			item.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 1);
 		}
-		head.setItemMeta(headMeta);
-		return head;
+		item.setItemMeta(meta);
+		return item;
 	}
 
 	public boolean hasBackpack(Player p) {
@@ -163,7 +142,11 @@ public class Utils {
 	}
 
 	public boolean isBackpack(ItemStack item) {
-		if (item.equals(getBackpack()))
+		if (item.getItemMeta() == null)
+			return false;
+		if (item.getItemMeta().getDisplayName() == null)
+			return false;
+		if (item.getItemMeta().getDisplayName().equalsIgnoreCase(getBackpack().getItemMeta().getDisplayName()))
 			return true;
 		return false;
 	}
