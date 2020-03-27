@@ -122,7 +122,7 @@ public class Utils {
 	// Backpack utils
 	public ItemStack getBackpack() {
 		FileConfiguration config = plugin.getConfig();
-		Material material = Material.getMaterial(config.getString("Backpack.name"));
+		Material material = Material.getMaterial(config.getString("Backpack.material"));
 		ItemStack item = new ItemStack(material, 1);
 		ItemMeta meta = item.getItemMeta();
 		meta.setDisplayName(chat(config.getString("Backpack.name")));
