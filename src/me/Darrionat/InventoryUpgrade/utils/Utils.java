@@ -126,11 +126,12 @@ public class Utils {
 		ItemStack item = new ItemStack(material, 1);
 		ItemMeta meta = item.getItemMeta();
 		meta.setDisplayName(chat(config.getString("Backpack.name")));
+		item.setItemMeta(meta);
 		if (config.getBoolean("Backpack.glowing")) {
 			meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+			item.setItemMeta(meta);
 			item.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 1);
 		}
-		item.setItemMeta(meta);
 		return item;
 	}
 
